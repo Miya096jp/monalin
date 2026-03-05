@@ -1,4 +1,16 @@
 
+# 2026-03-05
+
+## [CONFIG] ciを通すため空のtest/sytemディレクトリと空のdb/schema.rbを作成(c564be)
+- test/system/.keepを定義しGitHubに空ディレクトリを追跡させる
+- CI test実行前のdb:prepareに対応するため空のschema.rbを作成した
+
+
+## [CINFIG] Gemfile.lockを同期し、CI用のx86_64-linuxプラットフォームを追加(00f5b4)
+- 昨日build中にGemfileのタイポが原因でやり直した際に、GemfileとGemfile.lockの中身がズレたらしい
+- AppleシリコンとGithub ActionsのubuntuではOS実行環境が異なる
+
+---
 
 # 2026-03-04
 
