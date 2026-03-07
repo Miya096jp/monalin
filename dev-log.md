@@ -1,4 +1,10 @@
 
+
+# 2026-03-07
+
+## [Feature] rootにlpを作成し"Hello world!"を表示 (d755e6)
+
+
 # 2026-03-05
 
 ## [CONFIG] ciを通すため空のtest/sytemディレクトリと空のdb/schema.rbを作成(c564be)
