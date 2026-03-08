@@ -532,6 +532,7 @@ DEPENDENCIES
   bundler-audit
   capybara
   debug
+  dotenv (~> 3.2)
   factory_bot_rails
   gemini-ai
   image_processing (~> 1.2)
