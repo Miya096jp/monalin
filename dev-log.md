@@ -1,4 +1,27 @@
 
+# 2026-03-08
+
+## Fix: rubyを安定版の3.4.3に変更(605152)
+- デフォルトで最新の4.0.1になっていたので、念の為安定版に変更
+
+## Fix: KamalのaccessoryにpostgresSQLを指定し設定を追加(af6bc3)
+- postgreSQLコンテナ用の設定を追加
+- database.ymlにhost:追加
+- config.deploy.ymlにaccesories他を追加
+- .kamal/secretsにPOSTGRES_PASSWORDを追加
+- 手動デプロイに成功
+
+## Chore: .kamal/secretsを.gitignoreに追加(31993e)
+- デフォルトで追加されていなかったので手動で追加
+
+## Config: Kamalの手動デプロイ設定(c12ee7)
+- config/deploy.ymlの編集
+
+## Chore: dotenv gemをインストール(396fdb)
+- config/deploy.ymlの注釈を参照してインストールしたが、.kamal/secretsを使用したため未使用。
+- 今後使わなかったら削除する
+
+---
 
 # 2026-03-07
 
