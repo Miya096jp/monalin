@@ -79,4 +79,4 @@ end
 
 gem "slim-rails", "~> 4.0"
 
-gem "dotenv", "~> 3.2", groups: [:development, :test]
+gem "dotenv", "~> 3.2", groups: [ :development, :test ]
