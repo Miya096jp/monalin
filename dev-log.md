@@ -1,3 +1,10 @@
+# 2026-03-14
+
+## Feature: Userモデル作成とvalidation追加(8f30a6)
+- rails consoleでUserリソースのCRUDとdb制約、validation、enumの動作確認
+
+
+---
 
 # 2026-03-08
 
