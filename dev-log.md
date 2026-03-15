@@ -1,3 +1,11 @@
+
+# 2026-03-15
+
+## Feature: Rspecの初期設定とUser model specを作成(71fa60)
+- Userモデルのvalidation, enumのテストを実装
+
+---
+
 # 2026-03-14
 
 ## Feature: Userモデル作成とvalidation追加(8f30a6)
