@@ -3,4 +3,6 @@ class User < ApplicationRecord
   enum :status, { active: 0, suspended: 1, banned: 2 }
 
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
+
+  has_many :social_accounts, dependent: :destroy
 end
