@@ -4,4 +4,10 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: "sessions#create"
   get "/auth/failure", to: "sessions#failure"
+
+  resource :session, only: [ :new, :create, :destroy ], path: "login"
+  resource :registration, only: [ :new, :create ], path: "signup"
+
+  get "login", to: "sessions#new", as: :login
+  get "signup", to: "registrations#new", as: :signup
 end
