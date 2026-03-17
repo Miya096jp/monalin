@@ -5,4 +5,5 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
 
   has_many :social_accounts, dependent: :destroy
+  has_many :sessions, dependent: :destroy
 end
