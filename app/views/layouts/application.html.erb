@@ -24,6 +24,11 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <p><%= "ログイン中: #{current_user.username}" %></p>
+    <% else %>
+      <p>ログインしていません</p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
