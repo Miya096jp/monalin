@@ -36,3 +36,6 @@
 # Kamal secrets
 /.kamal/secrets
 /.kamal/secrets.*
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
