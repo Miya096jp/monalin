@@ -1,3 +1,14 @@
+# 2026-03-17
+
+[session, messageリソースの作成 #43](https://github.com/Miya096jp/monalin/issues/43)
+
+Chore: User.firstのフォールバックを削除(6f54e2)
+Chore: UI作成用のseedsを作成(daa12b)
+Feature: Session/Messageモデルの作成(a86065)
+Config: generatorがrspecのファイルを生成するように設定変更(9d7c95)
+
+---
+
 # 2026-03-16
 
 [OmniAuth認証の実装 #42](https://github.com/Miya096jp/monalin/issues/42)
