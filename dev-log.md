@@ -1,5 +1,18 @@
+# 2026-03-16
+
+[OmniAuth認証の実装 #42](https://github.com/Miya096jp/monalin/issues/42)
+
+Feature: ログイン/登録ページ作成・current_userを設定(7050b1)
+Feature: sessions/registrationsコントローラーを作成(066e17)
+Feature: 認証周りのroutesを作成(e38430)
+Feature: Omniauthのsecrets保存と初期設定(02c57d)
+Feature: social_accountモデル作成, db制約, Userモデルとの関連付け(9f6333)
+
+---
 
 # 2026-03-15
+
+[Issue: ユーザーモデルの作成#41](https://github.com/Miya096jp/monalin/issues/41)
 
 ## Feature: Rspecの初期設定とUser model specを作成(71fa60)
 - Userモデルのvalidation, enumのテストを実装
@@ -7,6 +20,8 @@
 ---
 
 # 2026-03-14
+
+[Issue: ユーザーモデルの作成#41](https://github.com/Miya096jp/monalin/issues/41)
 
 ## Feature: Userモデル作成とvalidation追加(8f30a6)
 - rails consoleでUserリソースのCRUDとdb制約、validation、enumの動作確認
@@ -102,7 +117,7 @@
 - xxx
 
 ### 変更前
-- xxx
+ xxx
 
 ### 変更後
 - xxx
