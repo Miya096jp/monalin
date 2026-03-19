@@ -1,11 +1,14 @@
-section#new-session
-  div.ai-instruction
-    p
-      | こんにちは！まずは下のアイコンから撮影してくださいね。
-      = link_to "使い方", "#"
-  
-  div.capture-icons
-    button type="button" aria-label="ビデオ撮影" 📹
-    button type="button" aria-label="カメラ撮影" 📷
+section#new-session.p-4.hidden
+  div.flex.flex-col.items-start
+    span.mb-1 Monalin
+    div.ai-instruction.bg-chat.rounded-lg.p-4.max-w-xs
+      p
+        | こんにちは！まずは下のアイコンから撮影してくださいね。
+        = link_to "使い方", "#", class: "text-blue-500 underline ml-1"
+
+  div.capture-icons.flex.flex-col.gap-2.justify-center.mt-8
+    button type="button" aria-label="ビデオ撮影" class="text-3xl" 📹
+    button type="button" aria-label="カメラ撮影" class="text-3xl" 📷
 
 = render "sessions/form", session: Session.new
+

@@ -1,14 +1,19 @@
-section#chat
+section#chat.p-4.flex.flex-col.gap-4
   - @session_messages.each do |message|
     - if message.user?
-      div.user-message
-        p = message.body
+      div.user-message.flex.justify-end
+        div.bg-chat.rounded-lg.p-4.max-w-xs
+          p = message.body
+
     - else
-      div.ai-message
-        p = message.body
-        div.ai-actions
-          button type="button" aria-label="グッドボタン" 👌
+      div.ai-message.flex.flex-col.items-start
+        span.mb-1 Monalin
+        div.bg-chat.rounded-lg.p-4.max-w-xs 
+          p = message.body
+        div.ai-actions.flex.gap-2.mt-1
+          button type="button" aria-label="グッドボタン" 👍
           button type="button" aria-label="バッドボタン" 👎
           button type="button" aria-label="コピー" 📋
 
 = render "sessions/form", session: @session
+

@@ -1,11 +1,18 @@
-div#chat-form
-  button type="button" aria-label="撮影メニューを開く" +
+div#chat-form.fixed.bottom-0.left-0.right-0.p-4.hidden
+  div.capture-menu.hidden
+    div.flex.flex-col.gap-2.mb-2
+      button type="button" aria-label="ビデオ撮影" 📹 ビデオ撮影
+      button type="button" aria-label="カメラ撮影" 📷 カメラ撮影
 
-  - if session.persisted? 
-    = form_with model: [session, Message.new] do |f|
-      = f.text_area :body, placeholder: "メッセージを入力..."
-      = f.submit "↑", aria: { label: "送信" }
+  - if session.persisted?
+    = form_with model: [session, Message.new], class: "flex items-center gap-2" do |f|
+      button type="button" aria-label="撮影メニューを開く" class="text-xl" ＋
+      div.relative.flex-1
+        = f.text_area :body, placeholder: "メッセージを入力...", rows: 3, class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content "
+        = f.submit "↑", aria: { label: "送信" }, class: "absolute right-2 bottom-2 rounded-full w-6 h-6"
   - else
-    = form_with url: sessions_path do |f|
-      = f.text_area :body, placeholder: "メッセージを入力..."
-      = f.submit "↑", aria: { label: "送信" }
+    = form_with url: sessions_path, class: "flex items-center gap-2" do |f|
+      button type="button" aria-label="撮影メニューを開く" class="text-xl" ＋
+      div.relative.flex-1
+        = f.text_area :body, placeholder: "メッセージを入力...", rows: 3, class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content "
+        = f.submit "↑", aria: { label: "送信" }, class: "absolute right-2 bottom-2 rounded-full w-6 h-6"

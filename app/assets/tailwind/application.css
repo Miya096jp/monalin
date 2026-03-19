@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+:root {
+  --color-bg-page: #ffffff;
+  --color-bg-chat: #f3f4f6;
+}
+
+.bg-chat {
+  background-color: var(--color-bg-chat);
+}
