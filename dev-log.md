@@ -1,4 +1,18 @@
 
+# 2026-03-19
+
+## Issue
+[メインUIのマークアップとレイアウト（モバイルファースト） #44](https://github.com/Miya096jp/monalin/issues/44)
+
+## Commits
+Feature: メインUIのmarkup(78c9e5)
+Feature: メインUIをモバイルファーストでレイアウト(009bc0)
+
+## 補足
+- Issueのタイトル変更
+- 完了要件からStimulus制御を省略し、別Issueに分割
+
+---
 # 2026-03-18
 
 ## Issue
