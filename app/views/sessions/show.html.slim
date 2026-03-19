@@ -1,0 +1,14 @@
+section#chat
+  - @session_messages.each do |message|
+    - if message.user?
+      div.user-message
+        p = message.body
+    - else
+      div.ai-message
+        p = message.body
+        div.ai-actions
+          button type="button" aria-label="グッドボタン" 👌
+          button type="button" aria-label="バッドボタン" 👎
+          button type="button" aria-label="コピー" 📋
+
+= render "sessions/form", session: @session

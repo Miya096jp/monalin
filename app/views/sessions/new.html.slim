@@ -1,0 +1,11 @@
+section#new-session
+  div.ai-instruction
+    p
+      | こんにちは！まずは下のアイコンから撮影してくださいね。
+      = link_to "使い方", "#"
+  
+  div.capture-icons
+    button type="button" aria-label="ビデオ撮影" 📹
+    button type="button" aria-label="カメラ撮影" 📷
+
+= render "sessions/form", session: Session.new

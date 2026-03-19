@@ -1,0 +1,6 @@
+ul
+  - sessions.each do |session|
+    li
+      = link_to session.session_title, session_path(session)
+      = link_to '編集', edit_session_path(session)
+      = link_to '削除', session_path(session), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }

@@ -24,11 +24,49 @@
   </head>
 
   <body>
+    <h1 class="text-3xl font-bold text-blue-500">Hello Tailwind</h1>
     <% if current_user %>
       <p><%= "ログイン中: #{current_user.username}" %></p>
     <% else %>
       <p>ログインしていません</p>
     <% end %>
-    <%= yield %>
+
+    <header>
+      <button type="button">
+        ☰
+      </button>
+      <%= link_to "Monalin" %>
+    </header>
+
+    <aside id="menu">
+      <nav>
+        <ul>
+          <li><%= link_to "新しいセッション", new_session_path %></li>
+          <li><%= link_to "使い方", "#" %></li>
+        </ul>
+      </nav>
+
+      <div id="session-list">
+        <%= render "sessions/session_list", sessions: @sidebar_sessions %>
+      </div>
+
+      <nav>
+        <ul>
+          <li><%= link_to "利用規約", "#" %></li>
+          <li><%= link_to "プライバシーポリシー", "#" %></li>
+          <li><%= link_to "お問い合わせ", "#" %></li>
+          <li><%= link_to "About", "#" %></li>
+          <li><%= button_to "ログアウト", login_path, method: :delete %></li>
+        </ul>
+      </nav>
+
+      <button type="button">
+        ⚙
+      </button>
+    </aside>
+
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

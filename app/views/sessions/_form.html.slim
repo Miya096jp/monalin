@@ -1,0 +1,11 @@
+div#chat-form
+  button type="button" aria-label="撮影メニューを開く" +
+
+  - if session.persisted? 
+    = form_with model: [session, Message.new] do |f|
+      = f.text_area :body, placeholder: "メッセージを入力..."
+      = f.submit "↑", aria: { label: "送信" }
+  - else
+    = form_with url: sessions_path do |f|
+      = f.text_area :body, placeholder: "メッセージを入力..."
+      = f.submit "↑", aria: { label: "送信" }
