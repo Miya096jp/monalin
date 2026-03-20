@@ -1,12 +1,14 @@
-/ app/views/sessions/_session_list.html.slim
 ul.flex.flex-col.gap-1
   - sessions.each do |session|
-    li.group.flex.items-center.justify-between.px-2.py-1.rounded.hover:bg-gray-100
+    li.group.flex.items-center.justify-between.px-2.py-1.rounded.hover:bg-gray-100[
+      data-controller="session-menu"
+      data-action="click@window->session-menu#close"
+    ]
       = link_to session.session_title, session_path(session), class: "flex-1 truncate"
 
       div.relative.opacity-100.md:opacity-0.md:group-hover:opacity-100
-        button type="button" class="px-1" &#x2026;
-        div.hidden.absolute.right-0.bg-white.border.rounded.shadow.p-2
+        div.hidden.absolute.right-0.bg-white.border.rounded.shadow.p-2 data-session-menu-target="list"
           ul.flex.gap-1
-            li = link_to "✏️", edit_session_path(session)
-            li = link_to "🗑️", session_path(session), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }
+            li = link_to "✏️", edit_session_path(session), data: { action: "click->session-menu#hide" }
+            li = link_to "🗑️", session_path(session), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？", action: "click->session-menu#hide" }
+        button type="button" data-action="session-menu#show" class="px-1" &#x2026;
