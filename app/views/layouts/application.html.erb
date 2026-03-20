@@ -23,28 +23,40 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="menu">
     <% if current_user %>
       <p><%= "ログイン中: #{current_user.username}" %></p>
     <% else %>
       <p>ログインしていません</p>
     <% end %>
 
-    <header class="hidden">
-      <button type="button">
+    <header>
+      <button type="button" data-action="click->menu#open">
         ☰
       </button>
       <%= link_to "Monalin" %>
     </header>
 
+    <div
+      data-menu-target="overlay"
+      data-action="click->menu#close"
+      class="
+        fixed inset-0 bg-black/50 z-40 invisible opacity-0 transition-opacity
+        duration-300
+      "
+    >
+    </div>
+
     <aside
       id="menu"
+      data-menu-target="aside"
       class="
         fixed top-0 left-0 h-full w-[90%] bg-gray-50 border-r z-50 flex flex-col p-4
+        transition-transform duration-300 ease-out -translate-x-full
       "
     >
       <div class="flex justify-end">
-        <button type="button" aria-label="メニューを閉じる">
+        <button type="button" aria-label="メニューを閉じる" data-action="click->menu#close">
           ✕
         </button>
       </div>
@@ -59,11 +71,15 @@
         <%= render "sessions/session_list", sessions: @sidebar_sessions %>
       </div>
 
-      <div class="mt-4 relative">
-        <button type="button" class="text-xl">
+      <div
+        class="mt-4 relative"
+        data-controller="submenu"
+        data-action="click@window->submenu#close"
+      >
+        <button type="button" class="text-xl" data-action="click->submenu#toggle">
           &#x2026;
         </button>
-        <div class="hidden">
+        <div class="hidden" data-submenu-target="list">
           <ul
             class="
               flex flex-col gap-2 bg-white border rounded-lg p-4 absolute bottom-10 left-0
