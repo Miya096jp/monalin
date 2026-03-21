@@ -8,3 +8,7 @@
 .bg-chat {
   background-color: var(--color-bg-chat);
 }
+
+.bg-page {
+  background-color: var(--color-bg-page);
+}
