@@ -1,4 +1,7 @@
 class AuthSessionsController < ApplicationController
+  skip_before_action :require_login
+  layout "auth"
+
   def new
   end
 
@@ -9,8 +12,7 @@ class AuthSessionsController < ApplicationController
     if social
       user = social.user
       session[:user_id] = user.id
-      # 暫定: sessions_pathに変更予定
-      redirect_to root_path, notice: "ログインしました"
+      redirect_to home_path, notice: "ログインしました"
     else
       session[:omniauth_data] = {
         provider: auth.provider,
