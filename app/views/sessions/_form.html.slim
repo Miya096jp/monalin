@@ -1,4 +1,4 @@
-div#chat-form.fixed.bottom-0.left-0.right-0.p-4.hidden
+div#chat-form.fixed.bottom-0.left-0.right-0.p-4.z-10.bg-page
   div.capture-menu.hidden
     div.flex.flex-col.gap-2.mb-2
       button type="button" aria-label="ビデオ撮影" 📹 ビデオ撮影
@@ -8,11 +8,11 @@ div#chat-form.fixed.bottom-0.left-0.right-0.p-4.hidden
     = form_with model: [session, Message.new], class: "flex items-center gap-2" do |f|
       button type="button" aria-label="撮影メニューを開く" class="text-xl" ＋
       div.relative.flex-1
-        = f.text_area :body, placeholder: "メッセージを入力...", rows: 3, class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content "
+        = f.text_area :body, placeholder: "メッセージを入力...", class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content min-h-[4.5rem]"
         = f.submit "↑", aria: { label: "送信" }, class: "absolute right-2 bottom-2 rounded-full w-6 h-6"
   - else
     = form_with url: sessions_path, class: "flex items-center gap-2" do |f|
       button type="button" aria-label="撮影メニューを開く" class="text-xl" ＋
       div.relative.flex-1
-        = f.text_area :body, placeholder: "メッセージを入力...", rows: 3, class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content "
+        = f.text_area :body, placeholder: "メッセージを入力...", class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content min-h-[4.5rem]"
         = f.submit "↑", aria: { label: "送信" }, class: "absolute right-2 bottom-2 rounded-full w-6 h-6"
