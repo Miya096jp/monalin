@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get "welcome/index"
   get "up" => "rails/health#show", as: :rails_health_check
-  root "pages#lp"
+  root "welcome#index"
 
   resource :auth_session, only: [ :create, :destroy ], path: "login"
   resource :registration, only: [ :new, :create ], path: "signup"
