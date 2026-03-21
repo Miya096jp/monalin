@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
-  def lp
-  end
+  before_action :require_login
 
   def home
   end
