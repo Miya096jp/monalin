@@ -2,9 +2,10 @@ require "capybara/rspec"
 require "selenium-webdriver"
 
 RSpec.configure do |config|
-  config.before(:each, type: :system) do
+  config.before(:each, type: :system) do |example|
+    screen_size = example.metadata[:desktop] ? [ 1280, 800 ] : [ 375, 812 ]
     if ENV["SELENIUM_REMOTE_URL"].present?
-      driven_by :selenium, using: :headless_chrome, options: {
+      driven_by :selenium, using: :headless_chrome, screen_size: screen_size, options: {
         browser: :remote,
         url: ENV["SELENIUM_REMOTE_URL"]
       }
