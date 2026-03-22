@@ -1,4 +1,22 @@
 
+# 2026-03-22
+
+[メインUIの各メニュー表示/非表示をStimulusで制御する #95](https://github.com/Miya096jp/monalin/issues/95)
+[セッションのリネーム・削除を実装 #48](https://github.com/Miya096jp/monalin/issues/48)
+
+## Config
+Config: GitHub ActionsのRubyバージョンを3.4に明示指定(c9f250)
+Test: メインUIのメニューに対するsystem specを追加(63c1e1)
+Config: Capybaraにレスポンシブ対応を設定(64edb3)
+Test: Oauthログインのハッピーパスのsystem specを追加(09a289)
+Config: Docker環境でsystem specを実行できるように設定(e077df)
+
+## 補足
+- system specにメタタグ(:desktop等)を付加することでレスポンシブ対応可能に
+- ubuntu latestのupdateに伴いRuby 3.4.3のプリビルドが失敗 
+- Oauth公式のtest用mockを使用
+
+---
 # 2026-03-21
 
 [セッションのリネーム・削除を実装 #48](https://github.com/Miya096jp/monalin/issues/48)
