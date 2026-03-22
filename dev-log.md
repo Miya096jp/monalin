@@ -1,3 +1,12 @@
+
+# 2026-03-21
+
+[セッションのリネーム・削除を実装 #48](https://github.com/Miya096jp/monalin/issues/48)
+## Commit
+Feature: Turbo frameでセッションリストに編集・削除機能を実装(6e1cdc)
+
+---
+
 # 2026-03-20
 
 ## Issue
@@ -212,4 +221,5 @@ CHOREでよくある作業
 - `[DOCS]` - ドキュメント更新
 - `[DEPLOY]` - デプロイ関連
 - `[SECURITY]` - セキュリティ対応
-- `[ENHANCE]` - 既存機能の改善、拡張
+- `[ENHANCE]` - 既存機能の改善、拡張- `[ENHANCE]` - 既存機能の改善、拡張
+- `[TEST]`
