@@ -10,4 +10,4 @@
         ul.flex.gap-1
           li = link_to "✏️", edit_session_path(session), data: { action: "click->session-menu#hide" }
           li = link_to "🗑️", session_path(session), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？", action: "click->session-menu#hide" }
-      button type="button" data-action="session-menu#show" class="px-1" &#x2026;
+      button type="button" data-action="click->session-menu#show" class="px-1" &#x2026;
