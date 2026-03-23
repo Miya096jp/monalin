@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   resources :sessions, except: [ :index ] do
     resources :messages, only: [ :create, :update ]
   end
+  resources :messages, only: [ :create ]
 end
