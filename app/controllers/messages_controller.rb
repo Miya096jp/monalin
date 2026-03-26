@@ -5,7 +5,11 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @session.save
-      head :ok
+      if @session.previously_new_record?
+        head :created, location: session_path(@session)
+      else
+        head :ok
+      end
     else
       head :unprocessable_entity
     end

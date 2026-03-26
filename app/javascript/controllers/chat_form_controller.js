@@ -3,14 +3,16 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["input"]
 
-  send(e) {
+  async send(e) {
     e.preventDefault()
     if (this.inputTarget.value.trim() === "") return
 
-    const formData = new FormData()
-    formData.append("message[body]", this.inputTarget.value)
+    const body = this.inputTarget.value
 
-    fetch(this.element.action, {
+    const formData = new FormData()
+    formData.append("message[body]", body)
+
+    const response = await fetch(this.element.action, {
       method: "POST",
       body: formData,
       headers: {
@@ -18,6 +20,29 @@ export default class extends Controller {
       }
     })
 
+    if (response.ok) {
+      const location = response.headers.get("Location")
+      if (location) {
+        window.location.href = location
+      } else {
+        this.appendMessage(body)
+      }
+    }
     this.inputTarget.value = ""
+  }
+
+  appendMessage(body) {
+    const container = document.getElementById("chat")
+    const outer = document.createElement("div")
+    outer.className = "user-message flex justify-end"
+    const inner = document.createElement("div")
+    inner.className = "bg-chat rounded-lg p-4 max-w-xs"
+    const p = document.createElement("p")
+    p.textContent = body
+
+    inner.appendChild(p)
+    outer.appendChild(inner)
+    container.appendChild(outer)
+    outer.scrollIntoView({ behavior: "smooth" })
   }
 }
