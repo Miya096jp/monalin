@@ -1,10 +1,23 @@
 
+# 2026-02-23
+
+[メッセージの投稿と保存 #47](https://github.com/Miya096jp/monalin/issues/47)
+
+## Commit
+Feature: fetch APIでメッセージを送信・保存(ee67ad)
+
+## 補足
+- 将来的にブログを添付することを見越してformDataとfetch APIでフォーム送信できるようにした
+- メッセージのDOM表示はTurbo streamでない方法を検討する
+
+---
+
 # 2026-03-22
 
 [メインUIの各メニュー表示/非表示をStimulusで制御する #95](https://github.com/Miya096jp/monalin/issues/95)
 [セッションのリネーム・削除を実装 #48](https://github.com/Miya096jp/monalin/issues/48)
 
-## Config
+## Commit
 Config: GitHub ActionsのRubyバージョンを3.4に明示指定(c9f250)
 Test: メインUIのメニューに対するsystem specを追加(63c1e1)
 Config: Capybaraにレスポンシブ対応を設定(64edb3)
