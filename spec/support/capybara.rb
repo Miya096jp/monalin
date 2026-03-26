@@ -16,5 +16,9 @@ RSpec.configure do |config|
     else
       driven_by :selenium, using: :headless_chrome
     end
+    ActionController::Base.allow_forgery_protection = true
+  end
+  config.after(:each, type: :system) do
+    ActionController::Base.allow_forgery_protection = false
   end
 end

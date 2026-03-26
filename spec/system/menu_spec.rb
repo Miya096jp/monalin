@@ -1,4 +1,3 @@
-# spec/system/menu_spec.rb
 require "rails_helper"
 
 RSpec.describe "Menu", type: :system do
