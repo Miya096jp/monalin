@@ -12,21 +12,27 @@ export default class extends Controller {
     const formData = new FormData()
     formData.append("message[body]", body)
 
-    const response = await fetch(this.element.action, {
-      method: "POST",
-      body: formData,
-      headers: {
-        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
-      }
-    })
+    try {
+      const response = await fetch(this.element.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        }
+      })
 
-    if (response.ok) {
-      const location = response.headers.get("Location")
-      if (location) {
-        window.location.href = location
+      if (response.ok) {
+        const location = response.headers.get("Location")
+        if (location) {
+          window.location.href = location
+        } else {
+          this.appendMessage(body)
+        }
       } else {
-        this.appendMessage(body)
+        console.error("予期せぬレスポンス:", response.status)
       }
+    } catch (error) {
+      console.error("通信エラー:", error)
     }
     this.inputTarget.value = ""
   }
