@@ -1,4 +1,4 @@
-dev.flex.flex-col.h-screen
+dev.flex.flex-col.h-screen data-controller="video-capture"
   section#chat.flex-1.overflow-y-auto.p-4.flex.flex-col.gap-4
     - @session_messages.each do |message|
       - if message.user?
@@ -16,5 +16,6 @@ dev.flex.flex-col.h-screen
             button type="button" aria-label="バッドボタン" 👎
             button type="button" aria-label="コピー" 📋
 
+  = render "shared/video_capture"
   = render "sessions/form", session: @session
 
