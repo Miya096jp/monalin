@@ -6,7 +6,12 @@ section#new-session.p-4n
         | こんにちは！まずは下のアイコンから撮影してくださいね。
         = link_to "使い方", "#", class: "text-blue-500 underline ml-1"
 
-  div.capture-icons.flex.flex-col.gap-2.justify-center.mt-8 data-controller="video-capture"
+  div.capture-icons.flex.flex-col.gap-2.justify-center.mt-8(
+      data-controller="video-capture"
+      data-video-capture-prep-duration-value="5000"
+      data-video-capture-interval-duration-value="8000"
+      data-video-capture-total-shots-value="6"
+    )
     button type="button" aria-label="ビデオ撮影" class="text-3xl" data-action="click->video-capture#open" 📹
     button type="button" aria-label="カメラ撮影" class="text-3xl" 📷
     

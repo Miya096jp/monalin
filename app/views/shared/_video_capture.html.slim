@@ -2,6 +2,7 @@ div.fixed.inset-0.z-50.bg-black.hidden data-video-capture-target="screen"
   div.h-full
     div.relative.w-full.h-full
       video.w-full.h-full.object-cover data-video-capture-target="video" autoplay playsinline muted
+      canvas.hidden data-video-capture-target="canvas"
       span.absolute.top-4.left-4.text-red-500.font-bold.hidden data-video-capture-target="rec"
         | REC
       button.absolute.top-4.right-4.text-white.text-3xl type="button" aria-label="閉じる" data-action="click->video-capture#close"
