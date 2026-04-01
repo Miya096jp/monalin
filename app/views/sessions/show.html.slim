@@ -1,4 +1,9 @@
-dev.flex.flex-col.h-screen data-controller="video-capture"
+dev.flex.flex-col.h-screen(
+    data-controller="video-capture"
+    data-video-capture-prep-duration-value="5000"
+    data-video-capture-interval-duration-value="8000"
+    data-video-capture-total-shots-value="6"
+  )
   section#chat.flex-1.overflow-y-auto.p-4.flex.flex-col.gap-4
     - @session_messages.each do |message|
       - if message.user?
