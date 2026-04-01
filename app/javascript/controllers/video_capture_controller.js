@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import db from "lib/database";
 
 export default class extends Controller {
 	static targets = ["screen", "video", "rec", "canvas"];
@@ -27,7 +28,7 @@ export default class extends Controller {
 	}
 
 	start() {
-		this.capturedImages = [];
+		this.capturedCount = 1;
 		this.recTarget.classList.remove("hidden");
 
 		this.prepTimer = setTimeout(() => {
@@ -38,12 +39,10 @@ export default class extends Controller {
 	async startIntervalCapture() {
 		await this.capture();
 
-		let count = 1;
 		this.intervalTimer = setInterval(async () => {
 			await this.capture();
-			count++;
 
-			if (count >= this.totalShotsValue) {
+			if (this.capturedCount >= this.totalShotsValue) {
 				clearInterval(this.intervalTimer);
 				this.close();
 			}
@@ -51,12 +50,24 @@ export default class extends Controller {
 	}
 
 	async capture() {
-		const blob = await this.captureFrame();
-		this.capturedImages.push(blob);
-		console.log(
-			`Captured: ${this.capturedImages.length}/${this.totalShotsValue}`,
-			blob,
-		);
+		try {
+			const blob = await this.captureFrame();
+			const record = {
+				key: crypto.randomUUID(),
+				message_id: null,
+				blob: blob,
+				diagnose: null,
+				captured_at: new Date().toISOString(),
+			};
+			await db.captures.add(record);
+			this.capturedCount++;
+			console.log(
+				`Captured: ${this.capturedCount}/${this.totalShotsValue}`,
+				record.key,
+			);
+		} catch (e) {
+			console.error("Failed to capture and save:", e);
+		}
 	}
 
 	captureFrame() {
