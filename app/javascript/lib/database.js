@@ -6,4 +6,6 @@ db.version(1).stores({
 	captures: "key, message_id, captured_at",
 });
 
+window.db = db;
+
 export default db;
