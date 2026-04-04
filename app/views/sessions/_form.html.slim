@@ -2,7 +2,7 @@ div#chat-form.bottom-0.left-0.right-0.p-4.z-10.bg-page data-controller = "captur
   div.capture-menu.hidden data-capture-menu-target= "list"
     div.flex.flex-col.gap-2.mb-2
       button type="button" aria-label="ビデオ撮影" data-action="click->video-capture#open" 📹 ビデオ撮影
-      button type="button" aria-label="カメラ撮影" 📷 カメラ撮影
+      button type="button" aria-label="カメラ撮影" data-action="click->photo-capture#open" 📷 カメラ撮影
 
   - if session.persisted?
     = form_with model: [session, Message.new], data: { controller: "chat-form", action: "submit->chat-form#send" }, class: "flex items-center gap-1" do |f|
