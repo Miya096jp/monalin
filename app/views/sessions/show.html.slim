@@ -1,5 +1,5 @@
 dev.flex.flex-col.h-screen(
-    data-controller="video-capture"
+    data-controller="video-capture photo-capture"
     data-video-capture-prep-duration-value="5000"
     data-video-capture-interval-duration-value="8000"
     data-video-capture-total-shots-value="6"
@@ -22,5 +22,6 @@ dev.flex.flex-col.h-screen(
             button type="button" aria-label="コピー" 📋
 
   = render "shared/video_capture"
+  = render "shared/photo_capture"
   = render "sessions/form", session: @session
 
