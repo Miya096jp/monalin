@@ -35,10 +35,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  def find_session
-    current_user.sessions.find(params[:session_id])
-  end
-
   def message_params
     params.require(:message).permit(:body, images: [ :key, :blob ])
   end

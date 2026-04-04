@@ -13,10 +13,12 @@ export default class extends Controller {
 			.toArray();
 		const formData = new FormData();
 		formData.append("message[body]", body);
-		blobs.forEach((b, i) => {
-			formData.append(`message[images][${i}][key]`, b.key);
-			formData.append(`message[images][${i}][blob]`, b.blob);
-		});
+		if (blobs.length > 0) {
+			blobs.forEach((b, i) => {
+				formData.append(`message[images][${i}][key]`, b.key);
+				formData.append(`message[images][${i}][blob]`, b.blob);
+			});
+		}
 
 		try {
 			const response = await fetch(this.element.action, {
@@ -28,16 +30,20 @@ export default class extends Controller {
 				},
 			});
 
-			if (response.ok) {
-				const location = response.headers.get("Location");
-				if (location) {
-					window.location.href = location;
-				} else {
-					this.appendMessage(body);
-					// indexedDBを更新する処理
-				}
+			if (!response.ok) {
+				throw new Error(`予期せぬステータス: ${response.status}`);
+			}
+
+			const res = await response.json();
+
+			await db.captures
+				.filter((c) => c.message_id === null)
+				.modify({ message_id: res.message_id });
+
+			if (response.status === 201) {
+				window.location.href = response.headers.get("Location");
 			} else {
-				console.error("予期せぬレスポンス:", response.status);
+				this.appendMessage(body);
 			}
 		} catch (error) {
 			console.error("通信エラー:", error);
