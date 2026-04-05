@@ -6,6 +6,7 @@ export default class extends Controller {
 	open() {
 		this.screenTarget.classList.remove("hidden");
 		this.startCamera();
+		this.capturedPhotos = [];
 	}
 
 	async startCamera() {
@@ -30,11 +31,6 @@ export default class extends Controller {
 		this.videoTarget.srcObject = null;
 	}
 
-	close() {
-		this.screenTarget.classList.add("hidden");
-		this.stopCamera();
-	}
-
 	disconnect() {
 		this.stopCamera();
 	}
@@ -48,15 +44,15 @@ export default class extends Controller {
 		}, this.prepDurationValue);
 	}
 
-	capture() {
+	async capture() {
 		try {
+			const blob = await this.captureFrame();
+			this.capturedPhotos.push(blob);
 			this.flashTarget.classList.replace("opacity-0", "opacity-100");
 			setTimeout(() => {
 				this.flashTarget.classList.replace("opacity-100", "opacity-0");
 			}, 100);
-			// const blob = await this.captureFrame();
-			// 撮影ボタン押下 -> capture発火 -> 写真を配列追加(ary.push(blob)) -> complete()でlistにdispatch
-			// console.log(`Captured: ${this.capturedCount}`);
+			console.log(`Captured Photos: ${this.capturedPhotos.length} captured!`);
 		} catch (e) {
 			console.error("Failed to capture and save:", e);
 		}
@@ -74,5 +70,18 @@ export default class extends Controller {
 		return new Promise((resolve) => {
 			canvas.toBlob((blob) => resolve(blob), "image/jpeg", 0.8);
 		});
+	}
+
+	complete() {
+		this.dispatch("complete", {
+			detail: { photos: this.capturedPhotos },
+		});
+		this.close();
+	}
+
+	close() {
+		this.screenTarget.classList.add("hidden");
+		this.capturedPhotos = [];
+		this.stopCamera();
 	}
 }
