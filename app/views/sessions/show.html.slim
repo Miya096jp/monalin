@@ -1,8 +1,9 @@
 dev.flex.flex-col.h-screen(
-    data-controller="video-capture photo-capture"
+    data-controller="video-capture photo-capture photo-select"
     data-video-capture-prep-duration-value="5000"
     data-video-capture-interval-duration-value="8000"
     data-video-capture-total-shots-value="6"
+    data-action="photo-capture:complete->photo-select#show"
   )
   section#chat.flex-1.overflow-y-auto.p-4.flex.flex-col.gap-4
     - @session_messages.each do |message|
@@ -23,5 +24,6 @@ dev.flex.flex-col.h-screen(
 
   = render "shared/video_capture"
   = render "shared/photo_capture"
+  = render "shared/photo_select"
   = render "sessions/form", session: @session
 

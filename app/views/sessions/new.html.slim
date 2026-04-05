@@ -7,15 +7,17 @@ section#new-session.p-4n
         = link_to "使い方", "#", class: "text-blue-500 underline ml-1"
 
   div.capture-icons.flex.flex-col.gap-2.justify-center.mt-8(
-      data-controller="video-capture photo-capture"
+      data-controller="video-capture photo-capture photo-select"
       data-video-capture-prep-duration-value="5000"
       data-video-capture-interval-duration-value="8000"
       data-video-capture-total-shots-value="6"
+      data-action="photo-capture:complete->photo-select#show"
     )
     button type="button" aria-label="ビデオ撮影" class="text-3xl" data-action="click->video-capture#open" 📹
     button type="button" aria-label="カメラ撮影" class="text-2xl" data-action="click->photo-capture#open" 📷
-    
+   
     = render "shared/video_capture"
     = render "shared/photo_capture"
+    = render "shared/photo_select"
     = render "sessions/form", session: Session.new
 
