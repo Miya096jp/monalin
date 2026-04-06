@@ -1,0 +1,18 @@
+template data-photo-select-target="itemTemplate" 
+  div.photoItem.relative.p-2
+    img.w-full src=""
+    input type="checkbox" class="hidden"
+    div.absolute.top-4.left-4.w-8.h-8.rounded-full.bg-gray-500.flex.items-center.justify-center.cursor-pointer data-action="click->photo-select#toggle"
+      | ✓
+
+div.fixed.inset-0.z-50.flex.flex-col.bg-black.hidden data-photo-select-target="screen"
+  div.flex.justify-end.p-4
+    button.text-white.text-3xl type="button" data-action="click->photo-select#close"
+      | ×
+  div.text-center.text-white.py-2.opacity-0.transition-opacity.duration-500 data-photo-select-target="error"
+
+  div.flex-1.overflow-y-auto data-photo-select-target="list"
+  div.flex.items-center.justify-center.py-4.bg-black/80
+    button.text-white.text-lg.font-bold.px-8.py-2.rounded-full.border.border-white type="button" data-action="click->photo-select#confirm"
+      | OK
+
