@@ -8,6 +8,13 @@ class MessagesController < ApplicationController
       message_params[:images].values.each do |image|
         @message.image_attachments.build(object_key: image[:key])
       end
+
+      images_for_job = message_params[:images].values.map do |img|
+        {
+          key: img[:key],
+          blob: Base64.strict_encode64(img[:blob].read)
+        }
+      end
     end
 
     if @session.save
@@ -17,6 +24,12 @@ class MessagesController < ApplicationController
       else
         render json: response_data, status: :ok
       end
+
+      ProcessAiResponseJob.perform_later(
+        session: @session,
+        message: @message,
+        images: images_for_job || []
+      )
     else
       head :unprocessable_entity
     end

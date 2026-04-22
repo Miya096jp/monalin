@@ -1,0 +1,24 @@
+responseMimeType: "application/json"
+responseJsonSchema:
+  type: object
+  properties:
+    image_metadata:
+      type: array
+      items:
+        type: object
+        properties:
+          diagnosed_detail:
+            type: string
+            description: "detailed description and depiction of each image used for counseling for preserving context through the session. For images not used, keep empty instead"
+          diagnosed:
+            type: "boolean"
+            description: "true if the image was used for expression diagnosis, false if it was unsuitable and not used(e.g. blurry, eyes closed)"
+        required:
+          - diagnosed_detail
+          - diagnosed
+    message_body:
+      type: string
+      description: "counseling response based on the user's message and image analysis results"
+  required:
+    - message_body
+    - image_metadata

@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_03_064745) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_21_094847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "image_attachments", force: :cascade do |t|
+    t.integer "ai_message_id"
     t.datetime "created_at", null: false
     t.boolean "diagnosed", default: false, null: false
+    t.string "diagnosed_detail"
     t.bigint "message_id", null: false
     t.string "object_key", null: false
     t.datetime "updated_at", null: false
-    t.index [ "message_id" ], name: "index_image_attachments_on_message_id"
+    t.index ["message_id"], name: "index_image_attachments_on_message_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -28,9 +30,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_064745) do
     t.datetime "created_at", null: false
     t.integer "role", default: 0, null: false
     t.bigint "session_id", null: false
-    t.integer "token"
+    t.integer "token", default: 0, null: false
     t.datetime "updated_at", null: false
-    t.index [ "session_id" ], name: "index_messages_on_session_id"
+    t.index ["session_id"], name: "index_messages_on_session_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -38,7 +40,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_064745) do
     t.string "session_title", default: "新規セッション", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index [ "user_id" ], name: "index_sessions_on_user_id"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "social_accounts", force: :cascade do |t|
@@ -50,8 +52,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_064745) do
     t.string "uid", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index [ "provider", "uid" ], name: "index_social_accounts_on_provider_and_uid", unique: true
-    t.index [ "user_id" ], name: "index_social_accounts_on_user_id"
+    t.index ["provider", "uid"], name: "index_social_accounts_on_provider_and_uid", unique: true
+    t.index ["user_id"], name: "index_social_accounts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,7 +65,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_03_064745) do
     t.integer "tickets", default: 3, null: false
     t.datetime "updated_at", null: false
     t.string "username", null: false
-    t.index [ "email" ], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "image_attachments", "messages"
