@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   before_action :set_session, only: [ :show, :edit, :update, :destroy ]
 
   def show
-    @session_messages = @session.messages.order(created_at: :asc)
+    @session_messages = @session.messages.includes(:diagnosed_images).order(created_at: :asc)
   end
 
   def edit

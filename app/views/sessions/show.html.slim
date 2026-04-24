@@ -1,3 +1,5 @@
+= turbo_stream_from @session
+
 dev.flex.flex-col.h-screen(
     data-controller="video-capture photo-capture photo-select"
     data-video-capture-prep-duration-value="5000"
@@ -13,17 +15,9 @@ dev.flex.flex-col.h-screen(
             p = message.body
 
       - else
-        div.ai-message.flex.flex-col.items-start
-          span.mb-1 Monalin
-          div.bg-chat.rounded-lg.p-4.max-w-xs 
-            p = message.body
-          div.ai-actions.flex.gap-2.mt-1
-            button type="button" aria-label="グッドボタン" 👍
-            button type="button" aria-label="バッドボタン" 👎
-            button type="button" aria-label="コピー" 📋
+        = render "messages/ai_message", message: message, diagnosed_images: message.diagnosed_images
 
   = render "shared/video_capture"
   = render "shared/photo_capture"
   = render "shared/photo_select"
   = render "sessions/form", session: @session
-
