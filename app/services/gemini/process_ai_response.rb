@@ -15,7 +15,8 @@ class Gemini::ProcessAiResponse
 
   def call
     response = fetch_ai_response
-    save_ai_response(response)
+    ai_message = save_ai_response(response)
+    return_ai_message(@session, ai_message)
   end
 
   private
@@ -58,22 +59,32 @@ class Gemini::ProcessAiResponse
     diagnosed_results = parsed["image_metadata"]
     ai_message_body = parsed["message_body"]
 
-    ActiveRecord::Base.transaction do
-      ai_message = @session.messages.create!(
+    ai_message = ActiveRecord::Base.transaction do
+      msg = @session.messages.create!(
         body: ai_message_body,
         role: "ai",
         token: response.dig("usageMetadata", "totalTokenCount") || 0
       )
-
       if @image_attachments.any?
         @image_attachments.each_with_index do |img, i|
           img.update!(
             diagnosed: diagnosed_results[i]["diagnosed"],
-            ai_message_id: ai_message.id,
+            ai_message_id: msg.id,
             diagnosed_detail: diagnosed_results[i]["diagnosed_detail"]
           )
         end
       end
+      msg
     end
+    ai_message
+  end
+
+  def return_ai_message(session, ai_message)
+    Turbo::StreamsChannel.broadcast_append_to(
+      session,
+      target: "chat",
+      partial: "messages/ai_message",
+      locals: { message: ai_message }
+    )
   end
 end
