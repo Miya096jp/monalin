@@ -47,6 +47,8 @@ export default class extends Controller {
 			}
 		} catch (error) {
 			console.error("通信エラー:", error);
+		} finally {
+			this.dispatch("submitted");
 		}
 		this.inputTarget.value = "";
 	}

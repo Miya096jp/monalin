@@ -1,13 +1,13 @@
 = turbo_stream_from @session
 
 dev.flex.flex-col.h-screen(
-    data-controller="video-capture photo-capture photo-select"
+    data-controller="video-capture photo-capture photo-select chat"
     data-video-capture-prep-duration-value="5000"
     data-video-capture-interval-duration-value="8000"
     data-video-capture-total-shots-value="6"
-    data-action="photo-capture:complete->photo-select#show"
+    data-action="photo-capture:complete->photo-select#show chat-form:submitted->chat#showLoader turbo:before-stream-render@document->chat#hideLoader"
   )
-  section#chat.flex-1.overflow-y-auto.p-4.flex.flex-col.gap-4
+  section#chat.flex-1.overflow-y-auto.p-4.flex.flex-col.gap-4 data-chat-target="container"
     - @session_messages.each do |message|
       - if message.user?
         div.user-message.flex.justify-end
@@ -16,6 +16,9 @@ dev.flex.flex-col.h-screen(
 
       - else
         = render "messages/ai_message", message: message, diagnosed_images: message.diagnosed_images
+      
+    div.loader.hidden data-chat-target="loader"
+      | loading...
 
   = render "shared/video_capture"
   = render "shared/photo_capture"
