@@ -37,14 +37,17 @@ export default class extends Controller {
 		}
 	}
 
-	show(records) {
+	async show(records) {
 		if (records.length === 0) return;
-		records.forEach((record) => {
+		for (const record of records) {
 			const img = document.createElement("img");
-			console.log("imageTag created!!");
 			img.src = URL.createObjectURL(record.blob);
-			console.log("url created!!", img.src);
-			this.garellyTarget.appendChild(img);
-		});
+			try {
+				await img.decode();
+				this.garellyTarget.appendChild(img);
+			} catch (e) {
+				console.error("Decode failded:", e);
+			}
+		}
 	}
 }
