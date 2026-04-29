@@ -1,10 +1,9 @@
 div.fixed.inset-0.z-50.bg-black.hidden data-video-capture-target="screen"
-  div.h-full
-    div.relative.w-full.h-full
-      video.w-full.h-full.object-cover data-video-capture-target="video" autoplay playsinline muted
-      canvas.hidden data-video-capture-target="canvas"
-      span.absolute.top-4.left-4.text-red-500.font-bold.hidden data-video-capture-target="rec"
-        | REC
-      button.absolute.top-4.right-4.text-white.text-3xl type="button" aria-label="閉じる" data-action="click->video-capture#close"
-        | ✕
-      button.absolute.bottom-12.left-1/2.-translate-x-1/2.w-16.h-16.rounded-full.border-4.border-white type="button" aria-label="撮影" data-action="click->video-capture#start"
+  div class="relative mx-auto aspect-9/16 max-h-[90vh] overflow-hidden"
+    video.w-full.h-full.object-cover data-video-capture-target="video" autoplay playsinline muted
+    canvas.hidden data-video-capture-target="canvas"
+    span.absolute.top-4.left-4.text-red-500.font-bold.hidden data-video-capture-target="rec"
+      | REC
+    button.absolute.top-4.right-4.text-white.text-3xl type="button" aria-label="閉じる" data-action="click->video-capture#close"
+      | ✕
+    button.absolute.bottom-12.left-1/2.-translate-x-1/2.w-16.h-16.rounded-full.border-4.border-white type="button" aria-label="撮影" data-action="click->video-capture#start"
