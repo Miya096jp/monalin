@@ -63,9 +63,13 @@ export default class extends Controller {
 		const canvas = this.canvasTarget;
 		const ctx = canvas.getContext("2d");
 
-		canvas.width = video.videoWidth;
-		canvas.height = video.videoHeight;
-		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+		const srcHeight = video.videoHeight;
+		const srcWidth = srcHeight * (9 / 16);
+		const sx = (video.videoWidth - srcWidth) / 2;
+
+		canvas.width = srcWidth;
+		canvas.height = srcHeight;
+		ctx.drawImage(video, sx, 0, srcWidth, srcHeight, 0, 0, srcWidth, srcHeight);
 
 		return new Promise((resolve) => {
 			canvas.toBlob((blob) => resolve(blob), "image/jpeg", 0.8);
