@@ -42,6 +42,7 @@ export default class extends Controller {
 		for (const record of records) {
 			const img = document.createElement("img");
 			img.src = URL.createObjectURL(record.blob);
+			img.classList.add("w-full", "aspect-square", "object-cover", "rounded");
 			try {
 				await img.decode();
 				this.garellyTarget.appendChild(img);
