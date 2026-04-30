@@ -1,7 +1,7 @@
 = turbo_stream_from @session
 
 dev.flex.flex-col.h-screen(
-    data-controller="video-capture photo-capture photo-select chat"
+    data-controller="video-capture photo-capture photo-select chat image-preview"
     data-video-capture-prep-duration-value="5000"
     data-video-capture-interval-duration-value="8000"
     data-video-capture-total-shots-value="6"
@@ -19,7 +19,8 @@ dev.flex.flex-col.h-screen(
       
     div.loader.hidden data-chat-target="loader"
       | loading...
-
+  
+  = render "shared/image_preview"
   = render "shared/video_capture"
   = render "shared/photo_capture"
   = render "shared/photo_select"
