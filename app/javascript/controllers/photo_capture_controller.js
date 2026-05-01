@@ -3,10 +3,19 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
 	static targets = ["screen", "video", "canvas", "flash"];
 
-	open() {
+	async open() {
 		this.screenTarget.classList.remove("hidden");
-		this.startCamera();
 		this.capturedPhotos = [];
+		await this.startCamera();
+		await this.deleteUnusedBlobs();
+	}
+
+	async deleteUnusedBlobs() {
+		try {
+			await db.captures.filter((c) => c.message_id === null).delete();
+		} catch (e) {
+			console.error("blob delete failed:", e);
+		}
 	}
 
 	async startCamera() {

@@ -9,9 +9,18 @@ export default class extends Controller {
 		totalShots: { type: Number, default: 6 },
 	};
 
-	open() {
+	async open() {
 		this.screenTarget.classList.remove("hidden");
-		this.startCamera();
+		await this.startCamera();
+		await this.deleteUnusedBlobs();
+	}
+
+	async deleteUnusedBlobs() {
+		try {
+			await db.captures.filter((c) => c.message_id === null).delete();
+		} catch (e) {
+			console.error("blob delete failed:", e);
+		}
 	}
 
 	async startCamera() {
