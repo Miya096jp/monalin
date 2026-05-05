@@ -79,4 +79,8 @@ Rails.application.configure do
   # set the delivery method using letter opener gem
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+
+  # Enabele active job retry_on/discard/on options
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
 end
