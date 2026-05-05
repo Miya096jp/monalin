@@ -87,4 +87,21 @@ class Gemini::ProcessAiResponse
       locals: { message: ai_message }
     )
   end
+
+  def self.return_error_message(session, message)
+    Turbo::StreamsChannel.broadcast_append_to(
+      session,
+      target: "chat",
+      partial: "messages/error_message",
+      locals: { message: message }
+    )
+  end
+
+  def self.show_retry_counts(session, executions)
+    Turbo::StreamsChannel.broadcast_update_to(
+      session,
+      target: "retry-counts",
+      html: "retrying... #{executions}/3"
+    )
+  end
 end

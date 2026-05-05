@@ -16,10 +16,11 @@ dev.flex.flex-col.h-screen(
 
       - else
         = render "messages/ai_message", message: message, diagnosed_images: message.diagnosed_images
-      
+
     div.loader.hidden data-chat-target="loader"
       | loading...
-  
+      div#retry-counts
+
   = render "shared/image_preview"
   = render "shared/video_capture"
   = render "shared/photo_capture"
