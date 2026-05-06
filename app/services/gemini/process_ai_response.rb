@@ -60,10 +60,12 @@ class Gemini::ProcessAiResponse
     ai_message_body = parsed["message_body"]
 
     ai_message = ActiveRecord::Base.transaction do
+      @message.update!(status: "completed")
       msg = @session.messages.create!(
         body: ai_message_body,
         role: "ai",
-        token: response.dig("usageMetadata", "totalTokenCount") || 0
+        token: response.dig("usageMetadata", "totalTokenCount") || 0,
+        status: "completed"
       )
       if @image_attachments.any?
         @image_attachments.each_with_index do |img, i|
