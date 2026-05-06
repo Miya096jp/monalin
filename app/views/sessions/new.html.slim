@@ -1,4 +1,4 @@
-section#new-session.p-4n
+section#new-session.p-4 data-controller="chat" data-action="chat-form:error->chat#showError"
   div.flex.flex-col.items-start
     span.mb-1 Monalin
     div.ai-instruction.bg-chat.rounded-lg.p-4.max-w-xs
@@ -6,6 +6,7 @@ section#new-session.p-4n
         | こんにちは！まずは下のアイコンから撮影してくださいね。
         = link_to "使い方", "#", class: "text-blue-500 underline ml-1"
 
+  div.text-center.opacity-0.transition-opacity.duration-500 data-chat-target="error"
   div.capture-icons.flex.flex-col.gap-2.justify-center.mt-8(
       data-controller="video-capture photo-capture photo-select"
       data-video-capture-prep-duration-value="5000"
@@ -15,7 +16,8 @@ section#new-session.p-4n
     )
     button type="button" aria-label="ビデオ撮影" class="text-3xl" data-action="click->video-capture#open" 📹
     button type="button" aria-label="カメラ撮影" class="text-2xl" data-action="click->photo-capture#open" 📷
-   
+
+
     = render "shared/video_capture"
     = render "shared/photo_capture"
     = render "shared/photo_select"

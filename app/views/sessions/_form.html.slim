@@ -5,13 +5,13 @@ div#chat-form.bottom-0.left-0.right-0.p-4.z-10.bg-page data-controller = "captur
       button type="button" aria-label="カメラ撮影" data-action="click->photo-capture#open" 📷 カメラ撮影
 
   - if session.persisted?
-    = form_with model: [session, Message.new], data: { controller: "chat-form", action: "submit->chat-form#send" }, class: "flex items-center gap-1" do |f|
+    = form_with model: [session, Message.new], data: { controller: "chat-form", action: "submit->chat-form#send", chat_form_message_value: session.messages.any? }, class: "flex items-center gap-1" do |f|
       button type="button" aria-label="撮影メニューを開く" class="text-xl" data-action="click->capture-menu#show" ＋
       div.relative.flex-1
         = f.text_area :body, placeholder: "メッセージを入力...", data: { chat_form_target: "input", action: "focus->capture-menu#hide" } ,class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content min-h-[4.5rem]"
         = f.submit "↑", aria: { label: "送信" }, class: "absolute right-2 bottom-2 rounded-full w-6 h-6"
   - else
-    = form_with model: Message.new, data: { controller: "chat-form", action: "submit->chat-form#send"} ,class: "flex items-center gap-2" do |f|
+    = form_with model: Message.new, data: { controller: "chat-form", action: "submit->chat-form#send", chat_form_message_value: session.messages.any? } ,class: "flex items-center gap-2" do |f|
       button type="button" aria-label="撮影メニューを開く" class="text-xl" data-action="click->capture-menu#show" ＋
       div.relative.flex-1
         = f.text_area :body, placeholder: "メッセージを入力...", data: { chat_form_target: "input", action: "focus->capture-menu#hide" } ,class: "w-full border rounded-lg p-2 pr-10 resize-none field-sizing-content min-h-[4.5rem]"
