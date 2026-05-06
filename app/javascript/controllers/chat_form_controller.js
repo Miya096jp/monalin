@@ -2,15 +2,28 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
 	static targets = ["input"];
+	static values = { message: Boolean };
 
 	async send(e) {
 		e.preventDefault();
-		if (this.inputTarget.value.trim() === "") return;
-
 		const body = this.inputTarget.value;
 		const blobs = await db.captures
 			.filter((c) => c.message_id === null)
 			.toArray();
+
+		if (this.messageValue === false && blobs.length === 0) {
+			this.dispatch("error", {
+				detail: { message: "最初に撮影を行なってください" },
+			});
+			return;
+		} else if (
+			this.messageValue === true &&
+			blobs.length === 0 &&
+			body === ""
+		) {
+			return;
+		}
+
 		const formData = new FormData();
 		formData.append("message[body]", body);
 		if (blobs.length > 0) {
@@ -42,8 +55,10 @@ export default class extends Controller {
 
 			if (response.status === 201) {
 				window.location.href = response.headers.get("Location");
+				this.messageValue = true;
 			} else {
 				this.appendMessage(body);
+				this.messageValue = true;
 			}
 		} catch (error) {
 			console.error("通信エラー:", error);
