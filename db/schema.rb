@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_21_094847) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_06_052420) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_21_094847) do
     t.datetime "created_at", null: false
     t.integer "role", default: 0, null: false
     t.bigint "session_id", null: false
+    t.string "status", default: "processing", null: false
     t.integer "token", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_messages_on_session_id"
