@@ -17,7 +17,8 @@ dev.flex.flex-col.h-screen(
       - else
         = render "messages/ai_message", message: message, diagnosed_images: message.diagnosed_images
 
-    div.loader.hidden data-chat-target="loader"
+    - loader_visibility = @session.messages.last&.processing? ? "" : "hidden"
+    div.loader data-chat-target="loader" class="#{loader_visibility}"
       | loading...
       div#retry-counts
 
