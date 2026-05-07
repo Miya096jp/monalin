@@ -25,7 +25,7 @@ class Gemini::ProcessAiResponse
     client = Gemini.new(
       credentials: {
         service: "generative-language-api",
-        api_key: Rails.application.credentials.dig(:gemini, :api_key),
+        api_key: Rails.application.credentials.dig(:gemini, Rails.env.to_sym, :api_key),
         version: "v1beta"
       },
       options: { model: "gemini-2.5-flash" }
