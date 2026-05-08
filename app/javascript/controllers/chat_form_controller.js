@@ -6,6 +6,7 @@ export default class extends Controller {
 
 	async send(e) {
 		e.preventDefault();
+
 		const body = this.inputTarget.value;
 		const blobs = await db.captures
 			.filter((c) => c.message_id === null)
@@ -29,7 +30,8 @@ export default class extends Controller {
 		if (blobs.length > 0) {
 			blobs.forEach((b, i) => {
 				formData.append(`message[images][${i}][key]`, b.key);
-				formData.append(`message[images][${i}][blob]`, b.blob);
+				const blob = new Blob([b.blob], { type: b.type || "image/jpeg" });
+				formData.append(`message[images][${i}][blob]`, blob);
 			});
 		}
 

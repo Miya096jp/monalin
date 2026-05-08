@@ -41,7 +41,8 @@ export default class extends Controller {
 		if (records.length === 0) return;
 		for (const record of records) {
 			const img = document.createElement("img");
-			img.src = URL.createObjectURL(record.blob);
+			const blob = new Blob([record.blob], { type: record.type });
+			img.src = URL.createObjectURL(blob);
 			img.classList.add("w-full", "aspect-square", "object-cover", "rounded");
 			img.setAttribute("data-action", "click->image-preview#showImagePreview");
 			try {

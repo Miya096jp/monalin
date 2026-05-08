@@ -38,22 +38,30 @@ export default class extends Controller {
 			return;
 		}
 
-		if (selectedPhotos.length >= 5) {
+		if (selectedPhotos.length > 5) {
 			this.showError("同時に分析できる写真は5枚までです");
 			return;
 		}
 
-		for (const selectedPhoto of selectedPhotos) {
-			const index = parseInt(selectedPhoto.dataset.index);
-			const blob = this.photos[index];
-			await db.captures.add({
-				key: crypto.randomUUID(),
-				message_id: null,
-				blob: blob,
-				diagnose: null,
-				captured_at: new Date().toISOString(),
-			});
+		try {
+			for (const selectedPhoto of selectedPhotos) {
+				const index = parseInt(selectedPhoto.dataset.index);
+				const blob = this.photos[index];
+				const arrayBuffer = await blob.arrayBuffer();
+				await db.captures.add({
+					key: crypto.randomUUID(),
+					message_id: null,
+					blob: arrayBuffer,
+					type: blob.type,
+					diagnose: null,
+					captured_at: new Date().toISOString(),
+				});
+			}
+		} catch (e) {
+			this.showError(`IndexedDB save error:${e.message}`);
+			console.error("IndexedDB save error:", e);
 		}
+
 		this.close();
 	}
 
