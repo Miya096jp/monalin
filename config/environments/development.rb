@@ -83,4 +83,7 @@ Rails.application.configure do
   # Enabele active job retry_on/discard/on options
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = { database: { writing: :queue } }
+
+  # ngrok
+  config.hosts << /.*\.ngrok-free\.dev/
 end
