@@ -3,7 +3,7 @@ class User < ApplicationRecord
   enum :status, { active: 0, suspended: 1, banned: 2 }
 
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
-  validetas :username, presence: true, length: { maximum: 24 }
+  validates :username, presence: true, length: { maximum: 24 }
 
   has_many :social_accounts, dependent: :destroy
   has_many :sessions, dependent: :destroy
