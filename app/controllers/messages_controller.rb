@@ -1,8 +1,12 @@
 class MessagesController < ApplicationController
   def create
     @session = find_or_create_session
+
+    return if handle_invalid_post(message_params[:body], message_params[:images])
+
     @message = @session.messages.build(body: message_params[:body])
     @message.role = "user"
+
 
     if message_params[:images]
       message_params[:images].values.each do |image|
@@ -39,6 +43,19 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def handle_invalid_post(body, images)
+    if @session.messages.empty? && images.nil?
+      Rails.logger.warn("Invalid post: first message without images - user_id: #{current_user.id}")
+      render json: { message: "撮影してください" }, status: :unprocessable_entity
+      true
+    elsif @session.messages.any? && body.blank? && images.nil?
+      Rails.logger.warn("Invalid post: empty post - user_id: #{current_user.id}")
+      render json: { message: "メッセージを入力してください" }, status: :unprocessable_entity
+      true
+    end
+  end
+
 
   def find_or_create_session
     if params[:session_id]

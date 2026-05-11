@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_06_052420) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_11_003106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,7 +22,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_06_052420) do
     t.bigint "message_id", null: false
     t.string "object_key", null: false
     t.datetime "updated_at", null: false
+    t.index ["ai_message_id"], name: "index_image_attachments_on_ai_message_id"
     t.index ["message_id"], name: "index_image_attachments_on_message_id"
+    t.index ["object_key"], name: "index_image_attachments_on_object_key", unique: true
   end
 
   create_table "messages", force: :cascade do |t|
@@ -70,6 +72,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_06_052420) do
   end
 
   add_foreign_key "image_attachments", "messages"
+  add_foreign_key "image_attachments", "messages", column: "ai_message_id"
   add_foreign_key "messages", "sessions"
   add_foreign_key "sessions", "users"
   add_foreign_key "social_accounts", "users"

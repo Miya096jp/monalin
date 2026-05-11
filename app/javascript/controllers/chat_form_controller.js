@@ -45,6 +45,12 @@ export default class extends Controller {
 				},
 			});
 
+			if (response.status === 422) {
+				const res = await response.json();
+				this.dispatch("error", { detail: { message: res.message } });
+				return;
+			}
+
 			if (!response.ok) {
 				throw new Error(`予期せぬステータス: ${response.status}`);
 			}
